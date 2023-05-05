@@ -1,4 +1,4 @@
-#42 Pool Exercises
+# 42 Pool Exercises
 
 This repository contains all the exercises that I completed during the 42 piscine.
 The piscine was an intensive programming bootcamp that challenged me to learn and apply fundamental programming concepts using the C language.
