@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 11:50:21 by jdoffemo          #+#    #+#             */
-/*   Updated: 2023/05/12 11:14:35 by jdoffemo         ###   ########.fr       */
+/*   Created: 2023/05/10 09:41:27 by jdoffemo          #+#    #+#             */
+/*   Updated: 2023/05/10 09:54:24 by jdoffemo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+int	ft_lstsize(t_list *lst)
 {
-	size_t	i;
-	size_t	len;
+	int		i;
+	t_list	*ptr;
 
 	i = 0;
-	len = dstsize - 1;
-	if (dstsize != 0)
+	ptr = lst;
+	while (ptr != NULL)
 	{
-		while (len > 0 && src[i])
-		{
-			dst[i] = src[i];
-			len--;
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	i = 0;
-	while (src[i])
 		i++;
+		ptr = ptr->next;
+	}
 	return (i);
 }
-/*int	main(void)
-{
-	char dst[5];
-	printf("%lu\n", ft_strlcpy(dst, "Bonjour", 0));
-	printf("%s\n", dst);
-	printf("%lu\n", strlcpy(dst, "Bonjour", 0));
-	printf("%s\n", dst);
-	return (1);
-}*/

@@ -6,7 +6,7 @@
 /*   By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:01:31 by jdoffemo          #+#    #+#             */
-/*   Updated: 2023/05/05 16:52:03 by jdoffemo         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:10:26 by jdoffemo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static	void	ft_free_array(char **a, int i)
 	free(a);
 }
 
-size_t	ft_len_word(const char *s, char c)
+static size_t	ft_len_word(const char *s, char c)
 {
 	size_t	len;
 

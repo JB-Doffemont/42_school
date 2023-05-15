@@ -6,7 +6,7 @@
 /*   By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:10:05 by jdoffemo          #+#    #+#             */
-/*   Updated: 2023/05/05 15:38:35 by jdoffemo         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:07:08 by jdoffemo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,65 @@ static	int	ft_count_digits(int n)
 	}
 	return (count);
 }	
-char	*ft_reverse_tab(n)
+
+static char	*ft_create_tab(char *src, int n, int sign)
 {
 	int		i;
-	char	*src;
-	char	*dst;
-	int		nb_char;
+	int		j;
+	char	temp;
 
 	i = 0;
-	nb_char = ft_count_digits(n);
-	while (i < nb_char)
+	temp = '\0';
+	while (n > 0)
 	{
-		src[i] = n % 10 + 48;
+		src[i++] = n % 10 + 48;
 		n = n / 10;
-		i++;
 	}
+	if (sign == 1)
+		src[i++] = '-';
 	src[i] = '\0';
+	j = 0;
+	while (j < i)
+	{
+		temp = src[i - 1];
+		src[i - 1] = src[j];
+		src[j] = temp;
+		i--;
+		j++;
+	}
+	return (src);
 }
 
 char	*ft_itoa(int n)
 {
-	int		i;
-	int		sign;
-	char	*str;
-			
+	int			i;
+	int			sign;
+	char		*str;
+
 	i = 0;
 	sign = 0;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (n < 0)
+	{
+		n *= -1;
+		sign = 1;
+	}
 	str = ft_calloc((ft_count_digits(n) + 1 + sign), sizeof(char));
 	if (!str)
 		return (NULL);
+	if (n == 0)
+	{
+		str[i] = 48;
+		return (str);
+	}
+	ft_create_tab(str, n, sign);
 	return (str);
 }
 
-int	main(void)
+/*int	main(void)
 {
-	char	*str = ft_itoa(156);
+	char *str = ft_itoa(-10);
 	printf("%s\n", str);
 	return (0);
-}
+}*/
