@@ -6,7 +6,7 @@
 /*   By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:58:52 by jdoffemo          #+#    #+#             */
-/*   Updated: 2023/05/15 14:05:43 by jdoffemo         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:12:08 by jdoffemo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strcheck(char *s, va_list va)
 	else if (*(s + 1) == 's')
 		len += ft_putstr(va_arg(va, char *));
 	else if (*(s + 1) == 'i' || *(s + 1) == 'd')
-		ft_putchar('d');
+		len += ft_putnbr(va_arg(va, int));
 	else if (*(s + 1) == 'p')
 		ft_putchar('p');
 	else if (*(s + 1) == 'u')
@@ -61,9 +61,10 @@ int	main(void)
 {
 	char	coucou;
 	char	str[] = "YOLO";
+	int		nb = -214748364;
 
 	coucou = 'd';
-	printf("%d", ft_printf("Bonjour %s e et %c tr", str, coucou));
-	//ft_printf("Bonjour %s e et %c tr", str, coucou);
+	printf("%d", ft_printf("Num : %d", nb));
+	printf("%d", printf("Num : %d", nb));
 	return (0);
 }
