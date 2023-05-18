@@ -6,11 +6,11 @@
 /*   By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 13:24:26 by jdoffemo          #+#    #+#             */
-/*   Updated: 2023/05/15 15:23:49 by jdoffemo         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:36:46 by jdoffemo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putnbr(int nb)
 {

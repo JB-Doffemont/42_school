@@ -6,11 +6,11 @@
 /*   By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:58:52 by jdoffemo          #+#    #+#             */
-/*   Updated: 2023/05/16 15:46:55 by jdoffemo         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:46:37 by jdoffemo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_strcheck(char *s, va_list va)
 {
@@ -24,14 +24,13 @@ int	ft_strcheck(char *s, va_list va)
 	else if (*(s + 1) == 'i' || *(s + 1) == 'd')
 		len += ft_putnbr(va_arg(va, int));
 	else if (*(s + 1) == 'p')
-		ft_putchar('p');
+		len += ft_convert_param(va_arg(va, void *));
 	else if (*(s + 1) == 'u')
-		ft_putnbr_unint('u');
+		len += ft_putnbr_unint(va_arg(va, unsigned int));
 	else if (*(s + 1) == 'x' || *(s + 1) == 'X')
-		len += ft_putnbr_base(va_arg(va, long long int), *(s + 1));
+		len += ft_putnbr_base(va_arg(va, unsigned int), *(s + 1));
 	else if (*(s + 1) == '%')
-		ft_putchar('%');
-		//ft_print_percent();
+		len += ft_putchar('%');
 	return (len);
 }
 
@@ -57,14 +56,14 @@ int	ft_printf(const char *format, ...)
 	return (len);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char	coucou;
-	char	str[] = "YOLO";
-	unsigned int		nb = -65535;
+	char	str[] = "";
+	unsigned int		nb = -4560;
 
 	coucou = 'd';
-	//printf("\n%d\n", ft_printf("Num : %X\n", nb));
-	printf("\n%d\n", printf("Num : %u\n", nb));
+	printf("\n%d\n", ft_printf("Num : %x\n", nb));
+	printf("\n%d\n", printf("Num : %x\n", nb));
 	return (0);
-}
+}*/
