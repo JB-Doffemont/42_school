@@ -21,7 +21,7 @@ La fonction `ft_printf` que j'ai créée a le même comportement que la fonction
 Pour installer et compiler le projet, clonez ce dépôt et utilisez la commande `make` à la racine du projet :
 
 ```bash
-git clone https://github.com/[JB-Doffemont]/42_school.git
+git clone https://github.com/JB-Doffemont/42_school.git
 cd ft_printf
 make
 ```
