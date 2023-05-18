@@ -14,14 +14,14 @@ Bienvenue sur le dépôt de mon projet Ft_printf. Ce projet fait partie de mon c
 
 ## Fonctionnalités
 
-La fonction `ft_printf` que j'ai créée a le même comportement que la fonction `printf` originale de la bibliothèque standard C. Elle gère les conversions de format suivantes : `c`, `s`, `p`, `d`, `i`, `u`, `x`, `X`, `%` et les flags `-`, `0`, `.` et `*`.
+La fonction `ft_printf` que j'ai créée a le même comportement que la fonction `printf` originale de la bibliothèque standard C. Elle gère les conversions de format suivantes : `c`, `s`, `p`, `d`, `i`, `u`, `x`, `X`, `%`.
 
 ## Installation
 
 Pour installer et compiler le projet, clonez ce dépôt et utilisez la commande `make` à la racine du projet :
 
 ```bash
-git clone https://github.com/[votre_nom_d'utilisateur]/ft_printf.git
+git clone https://github.com/[JB-Doffemont]/42_school.git
 cd ft_printf
 make
 ```
