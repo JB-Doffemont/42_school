@@ -6,12 +6,13 @@
 #    By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 14:13:26 by jdoffemo          #+#    #+#              #
-#    Updated: 2023/05/12 10:37:50 by jdoffemo         ###   ########.fr        #
+#    Updated: 2023/05/20 14:52:02 by jdoffemo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = libft.a
+NAME_BONUS = libft_bonus.a
 HD = ./libft.h
 SRC =./ft_isalpha.c ./ft_isdigit.c ./ft_isalnum.c \
 	./ft_isascii.c ./ft_isprint.c ./ft_strlen.c \
@@ -42,17 +43,18 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 	
-bonus: $(OBJ_BONUS)
-	ar rc $(NAME) $(OBJ_BONUS)
-	ranlib $(NAME)
+bonus: libft_bonus.a
+
+libft_bonus.a: $(OBJ) $(OBJ_BONUS)
+	ar rc $(NAME_BONUS) $(OBJ) $(OBJ_BONUS)
+	ranlib $(NAME_BONUS)
 	
 all: $(NAME)
 
 clean: 
-	rm -f $(OBJ)
-	rm -f $(OBJ_BONUS)
+	rm -f $(OBJ) $(OBJ_BONUS)
 	
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 	
 re: fclean all
