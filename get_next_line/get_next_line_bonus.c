@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdoffemo <jdoffemo@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:44:55 by jdoffemo          #+#    #+#             */
-/*   Updated: 2023/06/03 10:49:36 by jdoffemo         ###   ########.fr       */
+/*   Updated: 2023/06/03 10:36:43 by jdoffemo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 {
@@ -83,7 +83,7 @@ char	*ft_save_buffer(char *stash, char *buffer, int fd)
 	size_t		char_read;
 
 	char_read = 1;
-	while (char_read > 0 && !ft_strchr(stash, '\n'))
+	while (char_read > 0)
 	{
 		char_read = read(fd, buffer, BUFFER_SIZE);
 		if (char_read < 0)
@@ -91,8 +91,12 @@ char	*ft_save_buffer(char *stash, char *buffer, int fd)
 			free(buffer);
 			return (NULL);
 		}
+		else if (!char_read)
+			break ;
 		buffer[char_read] = '\0';
 		stash = ft_strjoin(stash, buffer);
+		if (ft_strchr(stash, '\n'))
+			break ;
 	}
 	free(buffer);
 	return (stash);
@@ -100,51 +104,87 @@ char	*ft_save_buffer(char *stash, char *buffer, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[OPEN_MAX];
 	char		*buffer;
 	char		*line;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	if (read(fd, 0, 0) < 0)
 	{
-		free(stash);
-		stash = NULL;
+		free(stash[fd]);
+		stash[fd] = NULL;
 		return (NULL);
 	}
 	buffer = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	if (!stash)
-		stash = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
-	stash = ft_save_buffer(stash, buffer, fd);
-	line = ft_strdup(stash);
-	stash = ft_save_stash(stash);
+	if (!stash[fd])
+		stash[fd] = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	stash[fd] = ft_save_buffer(stash[fd], buffer, fd);
+	if (!stash[fd])
+		return (NULL);
+	line = ft_strdup(stash[fd]);
+	stash[fd] = ft_save_stash(stash[fd]);
 	return (line);
 }
 
-int	main(void)
-{
-	int	fd;
+// int	main(void)
+// {
+// 	int	fd;
+// 	int	fd2;
+// 	int	fd3;
 
-	char *ptr;
-	fd = open("test.txt", O_RDONLY);
-	// printf("Second : %s", get_next_line(fd));
-	// printf("Third : %s", get_next_line(fd));
-		ptr = get_next_line(fd);
-		printf("%s", ptr);
-		free(ptr);
-		ptr = get_next_line(fd);
-		printf("%s", ptr);
-		free(ptr);
-		ptr = get_next_line(fd);
-		printf("%s", ptr);
-		free(ptr);
-		ptr = get_next_line(fd);
-		printf("%s", ptr);
-		free(ptr);
-	// printf("Fourth : %s", get_next_line(fd));
-	// get_next_line(fd);
-	// get_next_line(fd);
-	// get_next_line(fd);
-	close(fd);
-	return (0);
-}
+// 	char *ptr;
+// 	char *ptr2;
+// 	char *ptr3;
+// 	fd = open("test1.txt", O_RDONLY);
+// 	fd2 = open("test12.txt", O_RDONLY);
+// 	fd3 = open("test123.txt", O_RDONLY);
+// 	// printf("Second : %s", get_next_line(fd));
+// 	// printf("Third : %s", get_next_line(fd));
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr = get_next_line(fd);
+// 		printf("%s", ptr);
+// 		free(ptr);
+// 		ptr2 = get_next_line(fd2);
+// 		printf("%s", ptr2);
+// 		free(ptr2);
+// 		ptr3 = get_next_line(fd3);
+// 		printf("%s", ptr3);
+// 		free(ptr3);
+// 		ptr3 = get_next_line(fd3);
+// 		printf("%s", ptr3);
+// 		free(ptr3);
+// 	// printf("Fourth : %s", get_next_line(fd));
+// 	// get_next_line(fd);
+// 	// get_next_line(fd);
+// 	// get_next_line(fd);
+// 	close(fd);
+// 	close(fd2);
+// 	close(fd3);
+// 	return (0);
+// }
